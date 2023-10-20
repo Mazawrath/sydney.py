@@ -150,7 +150,7 @@ class SydneyClient:
                         "inputMethod": "Keyboard",
                         "text": prompt,
                         "messageType": MessageType.CHAT.value,
-                        "imageUrl": blob_data["processedBlobId"],
+                        "imageUrl": blob_data["blobId"],
                         "originalImageUrl": blob_data["blobId"],
                     },
                     "conversationSignature": self.conversation_signature,
