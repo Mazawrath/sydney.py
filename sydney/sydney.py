@@ -142,7 +142,7 @@ class SydneyClient:
 
         blob_data = {"blobId": None, "processedBlobId": None}
         if attachment_info:
-            if len(attachment_info["processedBlobId"] != 0):
+            if len(attachment_info["processedBlobId"]) != 0:
                 blob_data = {
                     "blobId": BING_BLOB_URL + attachment_info["blobId"],
                     "processedBlobId": BING_BLOB_URL + attachment_info["processedBlobId"],
