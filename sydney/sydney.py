@@ -92,6 +92,14 @@ class SydneyClient:
 
         if self.session and force_close:
             await self.session.close()
+            self.session = ClientSession(
+                headers=CHAT_HEADERS,
+                cookies=cookies,
+                trust_env=self.use_proxy,  # Use `HTTP_PROXY` and `HTTPS_PROXY` environment variables.
+                connector=TCPConnector(verify_ssl=False)
+                if self.use_proxy
+                else None,  # Resolve HTTPS issue when proxy support is enabled.
+            )
 
         if not self.session:
             self.session = ClientSession(
@@ -400,8 +408,6 @@ class SydneyClient:
         Connect to Bing Chat and create a new conversation.
         """
         session = await self._get_session(force_close=True)
-
-        await session.close() 
 
         async with session.get(BING_CREATE_CONVERSATION_URL) as response:
             if response.status != 200:
