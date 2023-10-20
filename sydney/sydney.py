@@ -401,6 +401,8 @@ class SydneyClient:
         """
         session = await self._get_session(force_close=True)
 
+        await session.close() 
+
         async with session.get(BING_CREATE_CONVERSATION_URL) as response:
             if response.status != 200:
                 raise CreateConversationException(
